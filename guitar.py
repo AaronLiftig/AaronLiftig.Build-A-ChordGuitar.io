@@ -33,13 +33,13 @@ class Guitar:
         for stringNum in range(numberOfStrings):
             noteNum = self.stringNotes[stringNum]
             leadNoteString = self.numToNoteDict[noteNum]
-            self.guitar.append([(noteNum,leadNoteString)])
+            self.guitar.append([((stringNum,0),(noteNum,leadNoteString))])
         for stringNum in range(numberOfStrings):
             for fretNum in range(1,numberOfFrets+1):
-                openNoteNum = self.guitar[stringNum][0][0]
+                openNoteNum = self.guitar[stringNum][0][1][0]
                 fretNoteNum = (openNoteNum+fretNum) % 12
                 neckNoteString = self.numToNoteDict[fretNoteNum]
-                self.guitar[stringNum].append((fretNoteNum,neckNoteString))
+                self.guitar[stringNum].append(((stringNum,fretNum),(fretNoteNum,neckNoteString)))
 
     @classmethod
     def ChangeGuitarTuning(cls,tuning):
