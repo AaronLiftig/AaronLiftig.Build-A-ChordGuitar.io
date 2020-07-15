@@ -1,5 +1,5 @@
 class Guitar:
-    def __init__(self,numberOfStrings,tuning,numberOfFrets=19):
+    def __init__(self,numberOfStrings=6,tuning="standard",numberOfFrets=19):
         self.numToNoteDict = {
                                 0:"A",
                                 1:"A#/Bb",
@@ -14,22 +14,41 @@ class Guitar:
                                 10:"G",
                                 11:"Ab/G#"
                               }
-        self.CreateGuitar(numberOfStrings,tuning,numberOfFrets)
+        
+        self.TuneGuitar(numberOfStrings,tuning,numberOfFrets)
     
-    def CreateGuitar(self,numberOfStrings,tuning,numberOfFrets):
-        self.guitar = []
+    def TuneGuitar(self,numberOfStrings=6,tuning="standard",numberOfFrets=19):
+        self.tuning = tuning
         if numberOfStrings == 6:
-            if tuning == 'standard':
+            if tuning == "standard":
                 self.stringNotes = [7,2,10,5,0,7]
-            elif tuning == 'drop d':
+            elif tuning == "drop d":
                 self.stringNotes = [7,2,10,5,0,5]
-            elif tuning == 'dadgad':
+            elif tuning == "dadgad":
                 self.stringNotes = [5,0,10,5,0,5]
-            elif tuning == 'double drop d':
+            elif tuning == "double drop d":
                 self.stringNotes = [5,2,10,5,0,5]
-            self.GuitarCreationFunc(numberOfStrings,numberOfFrets)
+            elif tuning == "open d":
+                self.stringNotes = [5,0,9,5,0,5]
+            elif tuning == "open e":
+                self.stringNotes = [7,2,11,7,2,7]
+            elif tuning == "open g":
+                self.stringNotes = [5,2,10,5,10,5]
+            elif tuning == "open a":
+                self.stringNotes = [7,4,0,7,0,7]
+            elif tuning == "dgcgcd":
+                self.stringNotes = [5,3,10,3,10,5]
+            elif tuning == "open c6":
+                self.stringNotes = [7,3,10,3,0,3]
+        elif numberOfStrings == 12:
+            if tuning == "standard":
+                self.stringNotes = [7,7,2,2,10,10,5,5,0,0,7,7]
+            
+        self.CreateGuitar(numberOfStrings,numberOfFrets)
     
-    def GuitarCreationFunc(self,numberOfStrings,numberOfFrets):
+    def CreateGuitar(self,numberOfStrings=6,numberOfFrets=19):
+        # Called by itself if tuning not changed
+        self.guitar = []
         for stringNum in range(numberOfStrings):
             noteNum = self.stringNotes[stringNum]
             leadNoteString = self.numToNoteDict[noteNum]
@@ -40,7 +59,3 @@ class Guitar:
                 fretNoteNum = (openNoteNum+fretNum) % 12
                 neckNoteString = self.numToNoteDict[fretNoteNum]
                 self.guitar[stringNum].append(((stringNum,fretNum),(fretNoteNum,neckNoteString)))
-
-    @classmethod
-    def ChangeGuitarTuning(cls,tuning):
-        pass
