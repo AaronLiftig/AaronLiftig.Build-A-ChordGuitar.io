@@ -73,29 +73,49 @@ class GuitarApp:
         self.yourGuitar = Guitar(numOfStrings,tuning,numOfFrets)
   
     def GetMiniScreen(self,stringNum,fretNum):
-        rootNoteNum = self.yourGuitar.guitar[stringNum][fretNum][1][0]
-        self.miniScreen = []
-        for string in range(len(self.yourGuitar.guitar)):
-            self.miniScreen.append([])
-        if fretNum <= 3:
+        rootNoteNum = self.yourGuitar.guitar[stringNum][fretNum][1][0] 
+        guitarStringLen = len(self.yourGuitar.guitar)
+        self.miniScreen = [[] for string in range(guitarStringLen)]
+        if fretNum <= 3: # Allows for miniScreen to always have 9 frets
             low = fretNum
             high = 9 - low
+            self.currentFret = (stringNum,fretNum)
         elif fretNum >= 16:
-            high = len(self.yourGuitar.guitar[0])-fretNum
+            guitarFretLen = len(self.yourGuitar.guitar[0])
+            high = guitarFretLen-fretNum
             low = 9 - high
+            self.currentFret = (stringNum,8-guitarFretLen+fretNum)
         else:
             low,high = 4,5
-        for string in range(len(self.yourGuitar.guitar)):
+            self.currentFret = (stringNum,4)
+        for string in range(guitarStringLen)):
+            i = 0
             for fret in range(fretNum-low,fretNum+high):
                 noteTup = self.yourGuitar.guitar[string][fret]
                 noteDiff = (noteTup[1][0] - rootNoteNum) % len(self.noteList)
                 noteString = self.noteList[noteDiff]
-                self.miniScreen[string].append((noteTup[0],noteTup[1],(noteDiff,noteString),self.noteColorDict[noteString]))
+                self.miniScreen[string].append((noteTup[0],noteTup[1],(noteDiff,noteString),self.noteColorDict[noteString],i))
+                i = (i+1) % 9 # miniScreen has constant fret length of 9
         return self.ApplyCordToMiniScreen()
 
     def ApplyCordToMiniScreen(self,cordString="major"):
         self.cordAppliedMiniScreen = deepcopy(self.miniScreen)
         cordNoteList = self.cordDict[cordString]
+        stringLen,fretLen = len(self.miniScreen),9 # miniScreen has constant fret length of 9
+        string,fret = self.currentFret[0],self.currentFret[1]
+        tuning = self.yourGuitar.tuning
+        n = 0 # cordNoteList iterator
+        for i in range(stringLen*fretLen): 
+            # TODO Find what is necessary in order to apply cord along various guitar tunings within miniScreen
+            data = self.miniScreen[string][fret]
+            tuningStringNote = tuning[string]
+            if data[2][0] != cordNoteList[n]
+                self.cordAppliedMiniScreen[string][fret] = (data[0],data[1],(data[2][0],"dropped"),data[3],data[4])
+                n += 1
+            if data[4] != fretLen-1:
+                fret += 1
+            else:
+                fret = (fret+1) % fretLen
         for i in range(len(self.miniScreen)):
             string = self.miniScreen[i]
             for j in range(len(string)):
