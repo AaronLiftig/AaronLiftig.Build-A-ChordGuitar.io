@@ -46,8 +46,7 @@ class Guitar:
             
         self.CreateGuitar(numberOfStrings,numberOfFrets)
     
-    def CreateGuitar(self,numberOfStrings=6,numberOfFrets=19):
-        # Called by itself if tuning not changed
+    def CreateGuitar(self,numberOfStrings=6,numberOfFrets=19): # Called by itself if tuning not changed
         self.guitar = []
         for stringNum in range(numberOfStrings):
             noteNum = self.stringNotes[stringNum]
