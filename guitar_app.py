@@ -88,38 +88,29 @@ class GuitarApp:
         else:
             low,high = 4,5
             self.currentFret = (stringNum,4)
-        for string in range(guitarStringLen)):
+        for string in range(guitarStringLen):
             i = 0
             for fret in range(fretNum-low,fretNum+high):
                 noteTup = self.yourGuitar.guitar[string][fret]
                 noteDiff = (noteTup[1][0] - rootNoteNum) % len(self.noteList)
                 noteString = self.noteList[noteDiff]
-                self.miniScreen[string].append((noteTup[0],noteTup[1],(noteDiff,noteString),self.noteColorDict[noteString],i))
+                self.miniScreen[string].append((noteTup[0],noteTup[1],
+                                               (noteDiff,noteString),
+                                               self.noteColorDict[noteString],
+                                               i))
                 i = (i+1) % 9 # miniScreen has constant fret length of 9
         return self.ApplyCordToMiniScreen()
 
     def ApplyCordToMiniScreen(self,cordString="major"):
         self.cordAppliedMiniScreen = deepcopy(self.miniScreen)
         cordNoteList = self.cordDict[cordString]
-        stringLen,fretLen = len(self.miniScreen),9 # miniScreen has constant fret length of 9
         string,fret = self.currentFret[0],self.currentFret[1]
-        tuning = self.yourGuitar.tuning
-        n = 0 # cordNoteList iterator
-        for i in range(stringLen*fretLen): 
-            # TODO Find what is necessary in order to apply cord along various guitar tunings within miniScreen
-            data = self.miniScreen[string][fret]
-            tuningStringNote = tuning[string]
-            if data[2][0] != cordNoteList[n]
-                self.cordAppliedMiniScreen[string][fret] = (data[0],data[1],(data[2][0],"dropped"),data[3],data[4])
-                n += 1
-            if data[4] != fretLen-1:
-                fret += 1
-            else:
-                fret = (fret+1) % fretLen
         for i in range(len(self.miniScreen)):
             string = self.miniScreen[i]
             for j in range(len(string)):
                 fret = string[j]
                 if fret[2][0] not in cordNoteList:
-                    self.cordAppliedMiniScreen[i][j] = (fret[0],fret[1],(fret[2][0],"dropped"),fret[3])
+                    self.cordAppliedMiniScreen[i][j] = (fret[0],fret[1],
+                                                        (fret[2][0],"dropped")
+                                                        ,fret[3])
         return self.cordAppliedMiniScreen
