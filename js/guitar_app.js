@@ -88,7 +88,7 @@ class GuitarApp {
             high = 9 - low;
             this.currentFret = [stringNum,fretNum];
         }
-        else if (fretNum >= 16) {
+        else if (fretNum >= this.yourGuitar.numberOfFrets - 3) {
             var guitarFretLen = this.yourGuitar.guitar[0].length;
             high = guitarFretLen-fretNum;
             low = 9 - high;
