@@ -66,6 +66,7 @@ class Guitar {
     CreateGuitar({numberOfStrings=6,numberOfFrets=19}) {
     //Called by itself if tuning not changed
         this.guitar = [];
+        this.numberOfFrets = numberOfFrets
         var noteNum;
         var leadNoteString;
         for (var stringNum = 0; stringNum < numberOfStrings; stringNum++) {
