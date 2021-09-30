@@ -1,5 +1,5 @@
 "use strict";
-const guitar = require("./guitar");
+import { Guitar } from "./guitar";
 
 class GuitarApp {
     constructor({numOfStrings=6,tuning="standard",numOfFrets=19} = {}) { 
@@ -70,7 +70,7 @@ class GuitarApp {
                               "major 7th":"red"
                               };
 
-        this.yourGuitar = new guitar.Guitar(numOfStrings,tuning,numOfFrets);
+        this.yourGuitar = new Guitar(numOfStrings,tuning,numOfFrets);
     }
   
     GetMiniScreen(stringNum,fretNum) {
@@ -143,4 +143,5 @@ class GuitarApp {
     }
 }
 
-module.exports.GuitarApp = GuitarApp;
+const _GuitarApp = GuitarApp;
+export { _GuitarApp as GuitarApp };
