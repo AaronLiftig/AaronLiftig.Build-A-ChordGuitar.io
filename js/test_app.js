@@ -1,5 +1,4 @@
 "use strict";
-import { GuitarApp } from "./guitar_app";
 
 var guitarApp = new GuitarApp();
 

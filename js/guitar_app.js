@@ -1,5 +1,4 @@
 "use strict";
-import { Guitar } from "./guitar";
 
 class GuitarApp {
     constructor({numOfStrings=6,tuning="standard",numOfFrets=19} = {}) { 
@@ -122,8 +121,7 @@ class GuitarApp {
     }
 
     ApplyCordToMiniScreen({cordString="major"} = {}) {
-        const clone = require('rfdc')();
-        this.cordAppliedMiniScreen = clone(this.miniScreen);
+        this.cordAppliedMiniScreen = structuredClone(this.miniScreen);
         var cordNoteList = this.cordDict[cordString];
         var [string,fret] = [this.currentFret[0],this.currentFret[1]];
         
@@ -142,6 +140,3 @@ class GuitarApp {
         return this.cordAppliedMiniScreen;
     }
 }
-
-const _GuitarApp = GuitarApp;
-export { _GuitarApp as GuitarApp };
