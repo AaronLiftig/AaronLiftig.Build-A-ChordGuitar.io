@@ -2,21 +2,8 @@
 
 class Guitar {
     constructor({numberOfStrings=6,tuning="standard",numberOfFrets=19} = {}) {
-        this.numToNoteDict = {
-                                0:"A",
-                                1:"A#/Bb",
-                                2:"B",
-                                3:"C",
-                                4:"Db/C#",
-                                5:"D",
-                                6:"Eb/D#",
-                                7:"E",
-                                8:"F",
-                                9:"Gb/F#",
-                                10:"G",
-                                11:"Ab/G#"
-                              };
-        
+        this.numToNoteDict = [ "A","A#/Bb","B","C","Db/C#","D","Eb/D#","E","F","Gb/F#","G","Ab/G#" ];
+
         this.TuneGuitar(numberOfStrings,tuning,numberOfFrets);
     }
 

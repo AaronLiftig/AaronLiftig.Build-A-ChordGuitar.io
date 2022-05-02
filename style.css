@@ -1,0 +1,25 @@
+.selector-div {
+    padding: 10px;
+}
+
+#main-guitar div {
+    display: inline-block; 
+}
+
+#main-guitar p {
+    font-size: 20px;
+}
+
+#main-guitar div div {
+    padding: 5px;
+}
+
+.guitar-fret {
+    border-style: solid;
+    border-width: thin;
+    border-color: black;
+}
+
+fieldset {
+    padding: 5px;
+}
