@@ -1,13 +1,13 @@
 "use strict";
 
 class Guitar {
-    constructor({numberOfStrings=6,tuning="standard",numberOfFrets=19} = {}) {
-        this.numToNoteDict = [ "A","A#/Bb","B","C","Db/C#","D","Eb/D#","E","F","Gb/F#","G","Ab/G#" ];
+    constructor({numberOfStrings=6,tuning="standard",numberOfFrets=20} = {}) {
+        this.numToNoteDict = [ "A","Bb/A#","B","C","Db/C#","D","Eb/D#","E","F","Gb/F#","G","Ab/G#" ];
 
         this.TuneGuitar(numberOfStrings,tuning,numberOfFrets);
     }
 
-    TuneGuitar({numberOfStrings=6,tuning="standard",numberOfFrets=19}) {
+    TuneGuitar({numberOfStrings=6,tuning="standard",numberOfFrets=20}) {
         this.tuning = tuning;
         if (numberOfStrings === 6) {
             if (tuning === "standard") {
@@ -50,12 +50,13 @@ class Guitar {
         this.CreateGuitar(numberOfStrings,numberOfFrets);
     }
 
-    CreateGuitar({numberOfStrings=6,numberOfFrets=19}) {
+    CreateGuitar({numberOfStrings=6,numberOfFrets=20}) {
     //Called by itself if tuning not changed
         this.guitar = [];
         this.numberOfFrets = numberOfFrets
         var noteNum;
         var leadNoteString;
+        // Add open string information to guitar
         for (var stringNum = 0; stringNum < numberOfStrings; stringNum++) {
             noteNum = this.stringNotes[stringNum];
             leadNoteString = this.numToNoteDict[noteNum];
@@ -65,6 +66,7 @@ class Guitar {
         var openNoteNum;
         var fretNoteNum;
         var neckNoteString;
+        // Add remaining string information
         for (var stringNum = 0; stringNum < numberOfStrings; stringNum++) {
             for (var fretNum = 1; fretNum < numberOfFrets+1; fretNum++) {
                 openNoteNum = this.guitar[stringNum][0][1][0];

@@ -12,7 +12,7 @@ function onPageLoad(guitar) {
 
     const footerPTag = document.getElementById("copyright");
     const footerText = document.createTextNode("© " + year + " - Free Build-A-Cord Guitar Learning");
-    footerPTag.appendChild(footerText);
+    footerPTag.append(footerText);
 
 
     // Tuning Dropdown
@@ -22,21 +22,32 @@ function onPageLoad(guitar) {
         var tuningOptionElement = document.createElement("option");
         tuningOptionElement.text = tuningOption;
         tuningOptionElement.value = tuningOption.toLowerCase();
-        tuningDropdown.appendChild(tuningOptionElement);
+        tuningDropdown.append(tuningOptionElement);
     }
 
 
     // Number of Frets Dropdown
     const numOfFretsDropdown = document.getElementById("guitar-fretNum-dropdown");
 
-    for (var numOfFretsOption of [ 18, 19, 20, 21, 22, 23, 24 ]) {
+    for (var numOfFretsOption of [ 19, 20, 21, 22, 23, 24 ]) {
         var numOfFretsOptionElement = document.createElement("option");
         numOfFretsOptionElement.text = numOfFretsOption;
         numOfFretsOptionElement.value = numOfFretsOption;
         if (numOfFretsOption === 22) {
             numOfFretsOptionElement.selected = true;
         }
-        numOfFretsDropdown.appendChild(numOfFretsOptionElement);
+        numOfFretsDropdown.append(numOfFretsOptionElement);
+    }
+
+
+    // Accidental Dropdown
+    const accidentalDropdown = document.getElementById("guitar-accidentalType-dropdown");
+
+    for (var accidentalOption of [ "#", "b" ]) {
+        var accidentalOptionElement = document.createElement("option");
+        accidentalOptionElement.text = accidentalOption;
+        accidentalOptionElement.value = accidentalOption;
+        accidentalDropdown.append(accidentalOptionElement);
     }
 
 
@@ -49,7 +60,7 @@ function onPageLoad(guitar) {
         chordOptionText =  chordOption.replace(/(^\w|\s\w|\/\w)/g, m => m.toUpperCase());
         chordOptionElement.text = chordOptionText;
         chordOptionElement.value = chordOption;
-        chordOptionDropdown.appendChild(chordOptionElement);
+        chordOptionDropdown.append(chordOptionElement);
     }
 
 
@@ -57,7 +68,7 @@ function onPageLoad(guitar) {
     const guitarElement = document.getElementById("main-guitar");
 
     var guitarAxisRow = document.createElement("div", { className: "row guitar-string", id: "axis" });
-    guitarElement.appendChild(guitarAxisRow);
+    guitarElement.append(guitarAxisRow);
 
     for (var a = 0; a < guitar.length; a++) {
         var guitarString = guitar[a];
@@ -67,7 +78,7 @@ function onPageLoad(guitar) {
                 var axisRowFret = document.createElement("div", { className: "guitar-fret-axis" });
                 var axisRowFretP = document.createElement("p");
                 var text = document.createTextNode(b);
-                axisRowFretP.appendChild(text);
+                axisRowFretP.append(text);
                 axisRowFret.append(axisRowFretP);
                 guitarAxisRow.append(axisRowFret);
             }
@@ -84,7 +95,7 @@ function onPageLoad(guitar) {
                 var fretText = document.createTextNode(note);
             }
             
-            fretP.appendChild(fretText);
+            fretP.append(fretText);
             fret.append(fretP);
             guitarStringRow.append(fret);
             guitarElement.append(guitarStringRow);

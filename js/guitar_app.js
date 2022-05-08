@@ -1,7 +1,7 @@
 "use strict";
 
 class GuitarApp {
-    constructor({numOfStrings=6,tuning="standard",numOfFrets=19} = {}) { 
+    constructor({numOfStrings=6,tuning="standard",numOfFrets=20} = {}) { 
         this.cordDict = {
                          "major":[0,4,7],
                          "minor":[0,3,7],
