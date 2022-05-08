@@ -1,7 +1,7 @@
 "use strict";
 
 class GuitarApp {
-    constructor({numOfStrings=6,tuning="standard",numOfFrets=20} = {}) { 
+    constructor({numOfStrings=6, tuning="standard", numOfFrets=20} = {}) { 
         this.cordDict = {
                          "major":[0,4,7],
                          "minor":[0,3,7],
@@ -69,7 +69,7 @@ class GuitarApp {
                               "major 7th":"red"
                               };
 
-        this.yourGuitar = new Guitar(numOfStrings,tuning,numOfFrets);
+        this.yourGuitar = new Guitar({numberOfStrings: numOfStrings, tuning: tuning, numberOfFrets: numOfFrets});
     }
   
     GetMiniScreen(stringNum,fretNum) {
@@ -117,7 +117,7 @@ class GuitarApp {
                 i = (i+1) % 9; // miniScreen has constant fret length of 9
             }
         }
-        return this.ApplyCordToMiniScreen();
+        return this.ApplyCordToMiniScreen({});
     }
 
     ApplyCordToMiniScreen({cordString="major"} = {}) {

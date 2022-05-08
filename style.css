@@ -1,25 +1,88 @@
 .selector-div {
-    padding: 5px;
+    padding: 20px;
 }
 
-#main-guitar div {
-    display: inline-block; 
-}
-
-#main-guitar p {
+#main-guitar {
     font-size: 20px;
+    font-weight: bold;
+    white-space:nowrap;
 }
 
-#main-guitar div div {
-    padding: 5px;
-}
-
+/* fret and fret-axis colors and borders */
 .guitar-fret {
+    width: 35px;
+
     border-style: solid;
     border-width: thin;
     border-color: black;
+    background-color: #E8E8E8;
+
+    cursor: pointer;
 }
 
-fieldset {
-    padding: 5px;
+#single-fret-mark {
+    border-width: medium;
+}
+
+#guitar-strings #single-fret-mark {
+    border-width: medium;
+    background-color: #28A4C3;
+    color: black;
+}
+
+#double-fret-mark {
+    border-width: thick;
+}
+
+#guitar-strings #double-fret-mark {
+    background-color: #969696;
+    color: black;
+}
+
+#nut {
+    border-width: thick;
+}
+
+#guitar-strings #nut {
+    background-color: #85410A;
+    color: white;
+}
+
+.guitar-fret-axis {
+    width: 35px;
+
+    border-style: solid;
+    border-width: thin;
+    border-color: white;
+}
+
+
+/* responsive main-guitar orientation and styling */
+@media (min-width : 1201px) {
+    .guitar-fret {
+        display: inline-block;
+    }
+    .guitar-fret-axis {
+        display: inline-block;
+    }
+}
+
+@media (max-width : 1200px) {
+    #guitar-strings {
+        display: inline-flex;
+        flex-direction: row-reverse;
+    }
+
+    .outer-guitar-div {
+        display: inline-flex;
+    }
+
+    .guitar-string {
+        display: inline-block;
+        width: 40px;
+    }
+
+    #axis {
+        width: 50px;
+    }
 }
