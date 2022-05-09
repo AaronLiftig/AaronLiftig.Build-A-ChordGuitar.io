@@ -5,7 +5,7 @@
 #main-guitar {
     font-size: 20px;
     font-weight: bold;
-    white-space:nowrap;
+    white-space: nowrap;
 }
 
 /* fret and fret-axis colors and borders */
@@ -25,13 +25,8 @@
 }
 
 #guitar-strings #single-fret-mark {
-    border-width: medium;
     background-color: #28A4C3;
     color: black;
-}
-
-#double-fret-mark {
-    border-width: thick;
 }
 
 #guitar-strings #double-fret-mark {
@@ -39,7 +34,8 @@
     color: black;
 }
 
-#nut {
+#nut,
+#double-fret-mark {
     border-width: thick;
 }
 
@@ -56,13 +52,12 @@
     border-color: white;
 }
 
-
 /* responsive main-guitar orientation and styling */
 @media (min-width : 1201px) {
     .guitar-fret {
         display: inline-block;
     }
-    
+
     .guitar-fret-axis {
         display: inline-block;
     }

@@ -107,6 +107,7 @@ function createFret(guitarAxisRow, accidentalType, guitarString, a, b) {
     let fret = document.createElement("div");
     fret = addFretMarkId(fret, b)
     fret.className = "guitar-fret";
+    fret.dataset.modalTarget = "#modal";
     let fretP = document.createElement("p");
     
     let fretText = getAccidentalFromFretText(guitarFret, {accidentalType: accidentalType});
@@ -142,6 +143,24 @@ function getGuitarStrings(guitar, guitarElement, guitarAxisRow, accidentalType) 
 }
 
 
+function openModal(modal) {
+    if (modal == null) return
+    modal.classList.add("active");
+    overlay.classList.add("active");
+}
+
+
+function addOpenEventListenersToGuitar() {
+    const openModalButtons = document.querySelectorAll("[data-modal-target]");
+    openModalButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const modal = document.querySelector(button.dataset.modalTarget);
+            openModal(modal);
+        })
+    })
+}
+
+
 function updateGuitarDiv() {
     params = getGuitarParameters();
     let tuning = params.tuningParam;
@@ -156,6 +175,35 @@ function updateGuitarDiv() {
     guitarAxisRow = getGuitarAxis(guitarElement);
 
     getGuitarStrings(guitar, guitarElement, guitarAxisRow, accidentalType);
+
+    addOpenEventListenersToGuitar();
+}
+
+
+function closeModal(modal) {
+    if (modal == null) return
+    modal.classList.remove("active");
+    overlay.classList.remove("active");
+}
+
+
+function addCloseEventListenersToGuitar() {
+    const closeModalButtons = document.querySelectorAll("[data-close-button]");
+    const overlay = document.getElementById("overlay");
+
+    overlay.addEventListener("click", () => {
+        const modals = document.querySelectorAll(".modalDiv.active");
+        modals.forEach(modal => {
+            closeModal(modal);
+        })
+    })
+
+    closeModalButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const modal = button.closest(".modalDiv");
+            closeModal(modal);
+        })
+    })
 }
 
 
@@ -176,6 +224,8 @@ function initializePage() {
     createDropdown("mini-screen-chord-dropdown", cordList, {textMethod: true});
     
     updateGuitarDiv();
+
+    addCloseEventListenersToGuitar();
 }
 
 
