@@ -2,7 +2,7 @@
 
 class GuitarApp {
     constructor({numOfStrings=6, tuning="standard", numOfFrets=20} = {}) { 
-        this.cordDict = {
+        this.chordDict = {
                          "major":[0,4,7],
                          "minor":[0,3,7],
                          "diminished":[0,3,6],
@@ -72,7 +72,7 @@ class GuitarApp {
         this.yourGuitar = new Guitar({numberOfStrings: numOfStrings, tuning: tuning, numberOfFrets: numOfFrets});
     }
   
-    getMiniScreen(stringNum, fretNum) {
+    getMiniScreen(stringNum, fretNum, {chordName = "major"}) {
         let rootNoteNum = this.yourGuitar.guitar[stringNum][fretNum][1][0];
         let guitarStringLen = this.yourGuitar.guitar.length;
         this.miniScreen = [];
@@ -117,24 +117,25 @@ class GuitarApp {
                 i = (i+1) % 9; // miniScreen has constant fret length of 9
             }
         }
-        return this.applyCordToMiniScreen({});
+
+        return this._applyCordToMiniScreen(chordName);
     }
 
-    applyCordToMiniScreen({cordString="major"} = {}) {
-        this.cordAppliedMiniScreen = structuredClone(this.miniScreen);
-        let cordNoteList = this.cordDict[cordString];
+    _applyCordToMiniScreen(chordString) {
+        this.chordAppliedMiniScreen = structuredClone(this.miniScreen);
+        let chordNoteList = this.chordDict[chordString];
         
         for (let i = 0; i < this.miniScreen.length; i++) {
             let miniString = this.miniScreen[i];
             for (let j = 0; j < miniString.length; j++) {
                 let fret = miniString[j];
-                if (!(cordNoteList.includes(fret[2][0]))) {
-                    this.cordAppliedMiniScreen[i][j] = [fret[0],fret[1],
+                if (!(chordNoteList.includes(fret[2][0]))) {
+                    this.chordAppliedMiniScreen[i][j] = [fret[0],fret[1],
                                                         fret[2],"dropped"
                                                         ,fret[4]];
                 }
             }
         }
-        return this.cordAppliedMiniScreen;
+        return this.chordAppliedMiniScreen;
     }
 }

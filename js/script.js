@@ -1,6 +1,7 @@
 const tuningList = [ "Standard", "Drop D", "DADGAD", "Double Drop D", "Open D",
                     "Open E", "Open G", "Open A", "DGCGCD", "Open C6" ]
 
+var userLocation;
 
 function addFretMarkId(fretDiv, fretNum) {
     if ([3, 5, 7, 9, 15, 17, 19, 21].includes(fretNum)) {
@@ -17,6 +18,7 @@ function addFretMarkId(fretDiv, fretNum) {
 function createDropdown(selectTagId, optionsIterable, {defaultOption = null, 
                         textMethod = false, valueMethod = false}) {
     const selectTag = document.getElementById(selectTagId);
+    selectTag.innerHTML = "";
 
     for (let option of optionsIterable) {
         let optionTag = document.createElement("option");
@@ -74,9 +76,9 @@ function getGuitar(tuning, numOfFrets) {
     return guitarApp.yourGuitar.guitar;
 }
 
-function getMiniScreen(tuning, numOfFrets, stringNum, fretNum) {
+function getMiniScreen(tuning, numOfFrets, stringNum, fretNum, {chordName = "major"}) {
     const guitarApp = new GuitarApp({tuning: tuning, numOfFrets: numOfFrets});
-    return guitarApp.getMiniScreen(stringNum, fretNum);
+    return guitarApp.getMiniScreen(stringNum, fretNum, {chordName: chordName});
 }
 
 
@@ -104,19 +106,16 @@ function populateGuitarAxis(guitarAxisRow, b) {
 
 
 function adjustTextColorToBackground(fret, backgroundColor) {
-    switch(backgroundColor) {
-        case "black":
-            fret.style.color = "white";
-            break;
-        case "yellow":
-            fret.style.color = "black";
-            break;
+    if (["black", "blue", "navy"].includes(backgroundColor)) {
+        fret.style.color = "white";
+    } else if (["yellow"].includes(backgroundColor)) {
+        fret.style.color = "black";
     }
     return fret
 }
 
 
-function createFret(guitarAxisRow, accidentalType, guitarString, stringNum, b, screen) {
+function createFret(guitarAxisRow, accidentalType, guitarString, stringNum, b, view) {
     let fretNum = guitarString[b][0][1];
     
     if (stringNum === 0) {
@@ -129,7 +128,7 @@ function createFret(guitarAxisRow, accidentalType, guitarString, stringNum, b, s
     fret = addFretMarkId(fret, fretNum);
     fret.id = `${stringNum},${fretNum}`;
 
-    if (screen === "mini-screen" && guitarString[b][3] !== "dropped") {
+    if (view === "mini-screen" && guitarString[b][3] !== "dropped") {
         fret.style.backgroundColor = guitarString[b][3];
         
         fret = adjustTextColorToBackground(fret, guitarString[b][3])
@@ -146,26 +145,26 @@ function createFret(guitarAxisRow, accidentalType, guitarString, stringNum, b, s
 }
 
 
-function createGuitarString(guitar, guitarStrings, guitarAxisRow, accidentalType, stringNum, screen) {
+function createGuitarString(guitar, guitarStrings, guitarAxisRow, accidentalType, stringNum, view) {
     let guitarString = guitar[stringNum];
     let guitarStringRow = document.createElement("div");
     guitarStringRow.className = "guitar-string";
     guitarStringRow.id = stringNum;
     for (let b = 0; b < guitarString.length; b++) {
-        let fret = createFret(guitarAxisRow, accidentalType, guitarString, stringNum, b, screen)
+        let fret = createFret(guitarAxisRow, accidentalType, guitarString, stringNum, b, view)
         guitarStringRow.append(fret);
         guitarStrings.append(guitarStringRow);
     }
 }
 
 
-function getGuitarStrings(guitar, guitarElement, guitarAxisRow, accidentalType, screen) {
+function getGuitarStrings(guitar, guitarElement, guitarAxisRow, accidentalType, view) {
     let guitarStrings = document.createElement("div");
     guitarStrings.className = "outer-guitar-div";
     guitarStrings.id = "guitar-strings";
 
     for (let stringNum = 0; stringNum < guitar.length; stringNum++) {
-        createGuitarString(guitar, guitarStrings, guitarAxisRow, accidentalType, stringNum, screen);
+        createGuitarString(guitar, guitarStrings, guitarAxisRow, accidentalType, stringNum, view);
         }
         guitarElement.append(guitarStrings);
 }
@@ -187,6 +186,12 @@ function addOpenEventListenersToGuitar() {
             fretNum = parseInt(fretNum);
             updateGuitarDiv("mini-screen", {stringNum: stringNum, fretNum: fretNum})
 
+            userLocation = [stringNum, fretNum] // Global for future updates of mini-screen chords 
+
+            const guitarApp = new GuitarApp({tuning: "standard", numOfFrets: 22});
+            const chordList = Object.keys(guitarApp.chordDict);
+            createDropdown("mini-screen-chord-dropdown", chordList, {textMethod: true});
+
             const modal = document.querySelector(button.dataset.modalTarget);
             openModal(modal);
         })
@@ -194,7 +199,16 @@ function addOpenEventListenersToGuitar() {
 }
 
 
-function updateGuitarDiv(screen, {stringNum = null, fretNum = null}) {
+function applyNewChord() {
+    const miniScreenDropdown = document.getElementById("mini-screen-chord-dropdown");
+    const chordName = miniScreenDropdown.value;
+
+    updateGuitarDiv("mini-screen", {stringNum: userLocation[0], 
+                    fretNum: userLocation[1], chordName: chordName});
+}
+
+
+function updateGuitarDiv(view, {stringNum = null, fretNum = null, chordName = "major"}) {
     params = getGuitarParameters();
     let tuning = params.tuningParam;
     let numOfFrets = parseInt(params.numOfFretsParam);
@@ -202,12 +216,11 @@ function updateGuitarDiv(screen, {stringNum = null, fretNum = null}) {
 
     let guitar;
     let guitarElement;
-    if (screen === "main-guitar") {
+    if (view === "main-guitar") {
         guitar = getGuitar(tuning, numOfFrets);
         guitarElement = document.getElementById("main-guitar");
-    } else {
-        guitar = getMiniScreen(tuning, numOfFrets, stringNum, fretNum)
-        mainGuitar = getGuitar(tuning, numOfFrets);
+    } else if (view === "mini-screen") {
+        guitar = getMiniScreen(tuning, numOfFrets, stringNum, fretNum, {chordName: chordName})
         guitarElement = document.getElementById("mini-screen");
     }
 
@@ -215,9 +228,9 @@ function updateGuitarDiv(screen, {stringNum = null, fretNum = null}) {
 
     guitarAxisRow = getGuitarAxis(guitarElement);
 
-    getGuitarStrings(guitar, guitarElement, guitarAxisRow, accidentalType, screen);
+    getGuitarStrings(guitar, guitarElement, guitarAxisRow, accidentalType, view);
 
-    if (screen === "main-guitar") {
+    if (view === "main-guitar") {
         addOpenEventListenersToGuitar();
     }
 }
@@ -262,9 +275,6 @@ function initializePage() {
     createDropdown("guitar-tuning-dropdown", tuningList, {valueMethod: true});
     createDropdown("guitar-numOfFrets-dropdown", [ 19, 20, 21, 22, 23, 24 ], {defaultOption: 22});
     createDropdown("guitar-accidentalType-dropdown", [ "#", "b" ], {});
-    const guitarApp = new GuitarApp({tuning: "standard", numOfFrets: 22});
-    const cordList = Object.keys(guitarApp.cordDict);
-    createDropdown("mini-screen-chord-dropdown", cordList, {textMethod: true});
     
     updateGuitarDiv("main-guitar", {});
 

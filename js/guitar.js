@@ -4,10 +4,10 @@ class Guitar {
     constructor({numberOfStrings=6, tuning="standard", numberOfFrets=20} = {}) {
         this.numToNoteDict = [ "A","Bb/A#","B","C","Db/C#","D","Eb/D#","E","F","Gb/F#","G","Ab/G#" ];
 
-        this.tuneGuitar({numberOfStrings: numberOfStrings, tuning: tuning, numberOfFrets: numberOfFrets});
+        this._tuneGuitar({numberOfStrings: numberOfStrings, tuning: tuning, numberOfFrets: numberOfFrets});
     }
 
-    tuneGuitar({numberOfStrings=6, tuning="standard", numberOfFrets=20}) {
+    _tuneGuitar({numberOfStrings=6, tuning="standard", numberOfFrets=20}) {
         this.tuning = tuning;
         if (numberOfStrings === 6) {
             if (tuning === "standard") {
@@ -47,10 +47,10 @@ class Guitar {
             }
         }
             
-        this.createGuitar({numberOfStrings: numberOfStrings, numberOfFrets: numberOfFrets});
+        this._createGuitar({numberOfStrings: numberOfStrings, numberOfFrets: numberOfFrets});
     }
 
-    createGuitar({numberOfStrings=6, numberOfFrets=24}) {
+    _createGuitar({numberOfStrings=6, numberOfFrets=24}) {
     //Called by itself if tuning not changed
         this.guitar = [];
         this.numberOfFrets = numberOfFrets

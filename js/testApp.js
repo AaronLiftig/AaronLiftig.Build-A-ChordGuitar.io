@@ -39,7 +39,7 @@ console.log("\n\n");
 console.log("#################");
 console.log("On Selecting Root:");
 console.log("#################");
-console.log("Mini Screen with Default Cord Applied (major cord):");
+console.log("Mini Screen with Default Cord Applied (major chord):");
 console.log("#################");
 console.log("Data Structure for Mini Screen:");
 console.log("(string#,fret#),(note#,noteString),(noteInterval#,noteIntervalString),noteIntervalColor");
@@ -64,7 +64,7 @@ console.log("#################");
 console.log("\n\n");
 
 console.log("New Mini Screen:");
-let yourNewMiniScreen = guitarApp.applyCordToMiniScreen({cordString: "minor 13th"});
+let yourNewMiniScreen = guitarApp.applyCordToMiniScreen({chordString: "minor 13th"});
 
 for (let num = 0; num < yourNewMiniScreen.length; num++) {
     console.log("String "+(num+1)+":",yourNewMiniScreen[num],"\n");
