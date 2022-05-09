@@ -103,10 +103,23 @@ function populateGuitarAxis(guitarAxisRow, b) {
 }
 
 
-function createFret(guitarAxisRow, accidentalType, guitarString, a, b) {
+function adjustTextColorToBackground(fret, backgroundColor) {
+    switch(backgroundColor) {
+        case "black":
+            fret.style.color = "white";
+            break;
+        case "yellow":
+            fret.style.color = "black";
+            break;
+    }
+    return fret
+}
+
+
+function createFret(guitarAxisRow, accidentalType, guitarString, stringNum, b, screen) {
     let fretNum = guitarString[b][0][1];
     
-    if (a === 0) {
+    if (stringNum === 0) {
         populateGuitarAxis(guitarAxisRow, fretNum);
     }
 
@@ -114,7 +127,14 @@ function createFret(guitarAxisRow, accidentalType, guitarString, a, b) {
     let fret = document.createElement("div");
     fret.className = "guitar-fret";
     fret = addFretMarkId(fret, fretNum);
-    fret.id = `${a},${b}`;
+    fret.id = `${stringNum},${fretNum}`;
+
+    if (screen === "mini-screen" && guitarString[b][3] !== "dropped") {
+        fret.style.backgroundColor = guitarString[b][3];
+        
+        fret = adjustTextColorToBackground(fret, guitarString[b][3])
+    }
+
     fret.dataset.modalTarget = "#modal";
     let fretP = document.createElement("p");
     
@@ -126,26 +146,26 @@ function createFret(guitarAxisRow, accidentalType, guitarString, a, b) {
 }
 
 
-function createGuitarString(guitar, guitarStrings, guitarAxisRow, accidentalType, a) {
-    let guitarString = guitar[a];
+function createGuitarString(guitar, guitarStrings, guitarAxisRow, accidentalType, stringNum, screen) {
+    let guitarString = guitar[stringNum];
     let guitarStringRow = document.createElement("div");
     guitarStringRow.className = "guitar-string";
-    guitarStringRow.id = a;
+    guitarStringRow.id = stringNum;
     for (let b = 0; b < guitarString.length; b++) {
-        let fret = createFret(guitarAxisRow, accidentalType, guitarString, a, b)
+        let fret = createFret(guitarAxisRow, accidentalType, guitarString, stringNum, b, screen)
         guitarStringRow.append(fret);
         guitarStrings.append(guitarStringRow);
     }
 }
 
 
-function getGuitarStrings(guitar, guitarElement, guitarAxisRow, accidentalType) {
+function getGuitarStrings(guitar, guitarElement, guitarAxisRow, accidentalType, screen) {
     let guitarStrings = document.createElement("div");
     guitarStrings.className = "outer-guitar-div";
     guitarStrings.id = "guitar-strings";
 
-    for (let a = 0; a < guitar.length; a++) {
-        createGuitarString(guitar, guitarStrings, guitarAxisRow, accidentalType, a);
+    for (let stringNum = 0; stringNum < guitar.length; stringNum++) {
+        createGuitarString(guitar, guitarStrings, guitarAxisRow, accidentalType, stringNum, screen);
         }
         guitarElement.append(guitarStrings);
 }
@@ -189,15 +209,13 @@ function updateGuitarDiv(screen, {stringNum = null, fretNum = null}) {
         guitar = getMiniScreen(tuning, numOfFrets, stringNum, fretNum)
         mainGuitar = getGuitar(tuning, numOfFrets);
         guitarElement = document.getElementById("mini-screen");
-        console.log(guitar);
-        console.log(mainGuitar);
     }
 
     guitarElement.innerHTML = "";
 
     guitarAxisRow = getGuitarAxis(guitarElement);
 
-    getGuitarStrings(guitar, guitarElement, guitarAxisRow, accidentalType);
+    getGuitarStrings(guitar, guitarElement, guitarAxisRow, accidentalType, screen);
 
     if (screen === "main-guitar") {
         addOpenEventListenersToGuitar();

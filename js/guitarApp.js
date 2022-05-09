@@ -123,17 +123,15 @@ class GuitarApp {
     applyCordToMiniScreen({cordString="major"} = {}) {
         this.cordAppliedMiniScreen = structuredClone(this.miniScreen);
         let cordNoteList = this.cordDict[cordString];
-        let [string,fret] = [this.currentFret[0],this.currentFret[1]];
         
-        let miniString;
         for (let i = 0; i < this.miniScreen.length; i++) {
-            miniString = this.miniScreen[i];
+            let miniString = this.miniScreen[i];
             for (let j = 0; j < miniString.length; j++) {
-                fret = miniString[j];
-                if (!(fret[2][0] in cordNoteList)) {
+                let fret = miniString[j];
+                if (!(cordNoteList.includes(fret[2][0]))) {
                     this.cordAppliedMiniScreen[i][j] = [fret[0],fret[1],
-                                                        [fret[2][0],"dropped"]
-                                                        ,fret[3],fret[4]];
+                                                        fret[2],"dropped"
+                                                        ,fret[4]];
                 }
             }
         }
