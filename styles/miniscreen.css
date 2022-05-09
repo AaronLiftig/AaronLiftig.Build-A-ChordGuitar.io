@@ -12,8 +12,9 @@
     border-radius: 10px;
     z-index: 10;
     background-color: white;
-    width: 500px;
+    width: 1000px;
     max-width: 80%;
+    min-width: 200px;
 }
 
 .modalDiv.active {
@@ -21,16 +22,21 @@
 }
 
 .modal-header {
-    padding: 10px 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid black;
+    border-bottom: 3px solid black;
+    width: 1000px;
+    max-width: 100%;
 }
 
-.modal-header .title {
-    font-size: 1.25rem;
+.modal-header {
     font-weight: bold;
+}
+
+.modal-header #title {
+    font-size: 4rem;
+}
+
+.modal-header button {
+    font-size: 4rem;
 }
 
 .modal-header .close-button {
@@ -38,12 +44,12 @@
     border: none;
     outline: none;
     background: none;
-    font-size: 1.25rem;
-    font-weight: bold;
+    font-size: 4rem;
 }
 
 .modal-body {
     padding: 10px 15px;
+    justify-content: center;
 }
 
 #overlay {
@@ -61,4 +67,18 @@
 #overlay.active {
     opacity: 1;
     pointer-events: all;
+}
+
+.mini-header-element {
+    display: inline-block;
+    padding: 10px;
+}
+
+#top-header-elements {
+    width: 1000px;
+    max-width: 100%;
+}
+
+#mini-screen-chord-dropdown {
+    width: 175px;
 }

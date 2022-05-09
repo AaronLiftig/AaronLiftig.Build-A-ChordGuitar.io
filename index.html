@@ -49,17 +49,17 @@
                             <legend>Tuning</legend>
                         </div>
                         <div class="col-md-6">
-                            <select name="guitar-tuning-dropdown" id="guitar-tuning-dropdown" onchange="updateGuitarDiv()"></select>
+                            <select name="guitar-tuning-dropdown" id="guitar-tuning-dropdown" onchange="updateGuitarDiv('main-guitar', {})"></select>
                         </div>
                     </fieldset>
                 </div>
-                <div class="selector-div" id="fretNum-div">
-                    <fieldset class="guitar-div" id="guitar-fretNum-div">
+                <div class="selector-div" id="numOfFrets-div">
+                    <fieldset class="guitar-div" id="guitar-numOfFrets-div">
                         <div class="col-md-6">
                             <legend>Number of Frets</legend>
                         </div>
                         <div class="col-md-6">
-                            <select name="guitar-fretNum-dropdown" id="guitar-fretNum-dropdown" onchange="updateGuitarDiv()"></select>
+                            <select name="guitar-numOfFrets-dropdown" id="guitar-numOfFrets-dropdown" onchange="updateGuitarDiv('main-guitar', {})"></select>
                         </div>
                     </fieldset>
                 </div>
@@ -69,37 +69,38 @@
                             <legend>Accidental Type</legend>
                         </div>
                         <div class="col-md-6">
-                            <select name="guitar-accidentalType-dropdown" id="guitar-accidentalType-dropdown" onchange="updateGuitarDiv()"></select>
+                            <select name="guitar-accidentalType-dropdown" id="guitar-accidentalType-dropdown" onchange="updateGuitarDiv('main-guitar', {})"></select>
                         </div>
                     </fieldset>
                 </div>
             </div>
             <div class="col-md-9">
-                <div id="main-guitar">
-                </div>
+                <div id="main-guitar"></div>
             </div>
         </div>
         <div class="modalDiv" id="modal">
             <div class="modal-header">
-                <div class="col-md-3">
-                    <div class="title">
-                        <h3>Mini-Screen</h3>
+                <div class="row" id="top-header-elements">
+                    <div class="col-xs-11 mini-header-element">
+                        <div class="text-center" id="title">Guitar Chord Mini-Screen</div>
+                    </div>
+                    <div class="col-xs-1 mini-header-element" id="mini-screen-button">
+                        <button data-close-button class="close-button">&times;</button>
                     </div>
                 </div>
-                <div class="col-md-3" id="mini-screen-chord-type-div">
-                    <fieldset class="mini-screen-chord-type" id="mini-screen-chord-type">
-                        <legend>Chord Type</legend>
-                        <select name="mini-screen-chord-dropdown" id="mini-screen-chord-dropdown"></select>
-                    </fieldset>
-                </div>
-                <div class="col-md-3" id="mini-screen-button">
-                    <button data-close-button class="close-button">&times;</button>
+                <div class="row text-center" id="bottom-header-elements">
+                    <div class="mini-header-element" id="mini-screen-chord-type-div">
+                        <fieldset class="mini-screen-chord-type" id="mini-screen-chord-type">
+                            <legend class="col-xs-5">Chord Type</legend>
+                            <div class="col-xs-2"></div>
+                            <select class="col-xs-5" name="mini-screen-chord-dropdown" id="mini-screen-chord-dropdown"></select>
+                        </fieldset>
+                    </div>
+                    
                 </div>
             </div>
-            <div class="modal-body">
-                <div class="col-md-6">
-                    <div id="mini-screen"></div>
-                </div>
+            <div class="col-md-12 text-center modal-body">
+                <div id="mini-screen"></div>
             </div>
         </div>
         <div id="overlay"></div>
@@ -117,5 +118,6 @@
     <script src="js/guitarApp.js"></script>
     <!-- <script src="js/testApp.js"></script> -->
     <script src="js/script.js"></script>
+    <script src="js/miniscreen.js"></script>
 </body>
 </html>
