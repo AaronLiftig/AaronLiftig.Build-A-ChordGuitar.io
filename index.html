@@ -24,19 +24,15 @@
                 </button>
                 <a href="/" class="navbar-brand">Build-A-Chord</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
         </div>
     </div>
 
     <div class="jumbotron text-center">
         <div class="row">
             <h1>Learn Guitar with Build-A-Chord</h1>
+        </div>
+        <div>
+            <h3>Click a note on the guitar to start building chords.</h3>
         </div>
     </div>
 
@@ -99,8 +95,11 @@
                     
                 </div>
             </div>
-            <div class="col-md-12 text-center modal-body">
-                <div id="mini-screen"></div>
+            <div class="row text-center modal-body">
+                <div class="col-md-4 text-center" id="chord-legend">
+                    <ul id="chord-list"></ul>
+                </div>
+                <div class="col-md-8" id="mini-screen"></div>
             </div>
         </div>
         <div id="overlay"></div>

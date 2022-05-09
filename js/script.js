@@ -71,13 +71,11 @@ function getGuitarParameters() {
 }
 
 
-function getGuitar(tuning, numOfFrets) {
-    const guitarApp = new GuitarApp({tuning: tuning, numOfFrets: numOfFrets});
+function getGuitar(guitarApp) {
     return guitarApp.yourGuitar.guitar;
 }
 
-function getMiniScreen(tuning, numOfFrets, stringNum, fretNum, {chordName = "major"}) {
-    const guitarApp = new GuitarApp({tuning: tuning, numOfFrets: numOfFrets});
+function getMiniScreen(guitarApp, stringNum, fretNum, {chordName = "major"}) {
     return guitarApp.getMiniScreen(stringNum, fretNum, {chordName: chordName});
 }
 
@@ -105,13 +103,13 @@ function populateGuitarAxis(guitarAxisRow, b) {
 }
 
 
-function adjustTextColorToBackground(fret, backgroundColor) {
+function adjustTextColorToBackground(element, backgroundColor) {
     if (["black", "blue", "navy"].includes(backgroundColor)) {
-        fret.style.color = "white";
+        element.style.color = "white";
     } else if (["yellow"].includes(backgroundColor)) {
-        fret.style.color = "black";
+        element.style.color = "black";
     }
-    return fret
+    return element
 }
 
 
@@ -208,20 +206,49 @@ function applyNewChord() {
 }
 
 
+function createMiniScreenNoteColorLegend(guitarApp, chordName) {
+    const chordDict = guitarApp.chordDict;
+    const noteNumberList = chordDict[chordName];
+    const noteColorDict = guitarApp.noteColorDict;
+    const noteNameList = guitarApp.noteList;
+    const uniqueNoteNames = new Set();
+
+    for (let noteNumber of noteNumberList) {
+        let noteName = noteNameList[noteNumber];
+        let noteColor = noteColorDict[noteName];
+        uniqueNoteNames.add([noteName, noteColor]);
+    }
+
+    const legendList = document.getElementById("chord-legend");
+    legendList.innerHTML = "";
+
+    for (let noteInfo of uniqueNoteNames) {
+        const listItem = document.createElement("li");
+        listItem.style.backgroundColor = noteInfo[1];
+        listItem.textContent = noteInfo[0];
+        adjustTextColorToBackground(listItem, listItem.style.backgroundColor);
+        legendList.append(listItem);
+    }
+}
+
+
 function updateGuitarDiv(view, {stringNum = null, fretNum = null, chordName = "major"}) {
     params = getGuitarParameters();
     let tuning = params.tuningParam;
     let numOfFrets = parseInt(params.numOfFretsParam);
     let accidentalType = params.accidentalTypeParam;
 
+    const guitarApp = new GuitarApp({tuning: tuning, numOfFrets: numOfFrets});
+
     let guitar;
     let guitarElement;
     if (view === "main-guitar") {
-        guitar = getGuitar(tuning, numOfFrets);
+        guitar = getGuitar(guitarApp);
         guitarElement = document.getElementById("main-guitar");
     } else if (view === "mini-screen") {
-        guitar = getMiniScreen(tuning, numOfFrets, stringNum, fretNum, {chordName: chordName})
+        guitar = getMiniScreen(guitarApp, stringNum, fretNum, {chordName: chordName})
         guitarElement = document.getElementById("mini-screen");
+        createMiniScreenNoteColorLegend(guitarApp, chordName);
     }
 
     guitarElement.innerHTML = "";
