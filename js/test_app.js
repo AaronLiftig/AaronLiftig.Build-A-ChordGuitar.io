@@ -1,6 +1,6 @@
 "use strict";
 
-var guitarApp = new GuitarApp();
+let guitarApp = new GuitarApp();
 
 console.log("#################");
 console.log("Website Homepage:");
@@ -12,7 +12,7 @@ console.log("\n\n");
 
 console.log("Guitar:","\n");
 console.log("Tuning:",guitarApp.yourGuitar.tuning,"\n");
-for (var num = 0; num < guitarApp.yourGuitar.guitar.length; num++) {
+for (let num = 0; num < guitarApp.yourGuitar.guitar.length; num++) {
     console.log("String "+(num+1)+":",guitarApp.yourGuitar.guitar[num],"\n");
 }
 console.log("\n\n");
@@ -26,11 +26,11 @@ console.log("(string#,fret#),(note#,noteString)");
 console.log("#################");
 console.log("\n\n");
 
-guitarApp.yourGuitar.TuneGuitar({tuning: "double drop d"});
+guitarApp.yourGuitar.tuneGuitar({tuning: "double drop d"});
 
 console.log("Newly Tuned Guitar:","\n");
 console.log("Tuning:",guitarApp.yourGuitar.tuning,"\n");
-for (var num = 0; num < guitarApp.yourGuitar.guitar.length; num++) {
+for (let num = 0; num < guitarApp.yourGuitar.guitar.length; num++) {
     console.log("String "+(num+1)+":",guitarApp.yourGuitar.guitar[num],"\n");
 }
 console.log("\n\n");
@@ -46,10 +46,10 @@ console.log("(string#,fret#),(note#,noteString),(noteInterval#,noteIntervalStrin
 console.log("#################");
 console.log("\n\n");
 
-var yourDefaultMiniScreen = guitarApp.GetMiniScreen(3,10);
+let yourDefaultMiniScreen = guitarApp.getMiniScreen(3,10);
 
 console.log("Mini Screen:");
-for (var num = 0; num < yourDefaultMiniScreen.length; num++){
+for (let num = 0; num < yourDefaultMiniScreen.length; num++){
     console.log("String "+(num+1)+":",yourDefaultMiniScreen[num],"\n")
 }
 console.log("\n\n");
@@ -64,8 +64,8 @@ console.log("#################");
 console.log("\n\n");
 
 console.log("New Mini Screen:");
-var yourNewMiniScreen = guitarApp.ApplyCordToMiniScreen({cordString:"minor 13th"});
+let yourNewMiniScreen = guitarApp.applyCordToMiniScreen({cordString: "minor 13th"});
 
-for (var num = 0; num < yourNewMiniScreen.length; num++) {
+for (let num = 0; num < yourNewMiniScreen.length; num++) {
     console.log("String "+(num+1)+":",yourNewMiniScreen[num],"\n");
 }

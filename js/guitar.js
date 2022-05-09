@@ -1,13 +1,13 @@
 "use strict";
 
 class Guitar {
-    constructor({numberOfStrings=6,tuning="standard",numberOfFrets=20} = {}) {
+    constructor({numberOfStrings=6, tuning="standard", numberOfFrets=20} = {}) {
         this.numToNoteDict = [ "A","Bb/A#","B","C","Db/C#","D","Eb/D#","E","F","Gb/F#","G","Ab/G#" ];
 
-        this.TuneGuitar({numberOfStrings: numberOfStrings, tuning: tuning, numberOfFrets: numberOfFrets});
+        this.tuneGuitar({numberOfStrings: numberOfStrings, tuning: tuning, numberOfFrets: numberOfFrets});
     }
 
-    TuneGuitar({numberOfStrings=6,tuning="standard",numberOfFrets=20}) {
+    tuneGuitar({numberOfStrings=6, tuning="standard", numberOfFrets=20}) {
         this.tuning = tuning;
         if (numberOfStrings === 6) {
             if (tuning === "standard") {
@@ -47,28 +47,28 @@ class Guitar {
             }
         }
             
-        this.CreateGuitar({numberOfStrings: numberOfStrings, numberOfFrets: numberOfFrets});
+        this.createGuitar({numberOfStrings: numberOfStrings, numberOfFrets: numberOfFrets});
     }
 
-    CreateGuitar({numberOfStrings=6,numberOfFrets=24}) {
+    createGuitar({numberOfStrings=6, numberOfFrets=24}) {
     //Called by itself if tuning not changed
         this.guitar = [];
         this.numberOfFrets = numberOfFrets
-        var noteNum;
-        var leadNoteString;
+        let noteNum;
+        let leadNoteString;
         // Add open string information to guitar
-        for (var stringNum = 0; stringNum < numberOfStrings; stringNum++) {
+        for (let stringNum = 0; stringNum < numberOfStrings; stringNum++) {
             noteNum = this.stringNotes[stringNum];
             leadNoteString = this.numToNoteDict[noteNum];
             this.guitar.push([[[stringNum,0],[noteNum,leadNoteString]]]);
         }
 
-        var openNoteNum;
-        var fretNoteNum;
-        var neckNoteString;
+        let openNoteNum;
+        let fretNoteNum;
+        let neckNoteString;
         // Add remaining string information
-        for (var stringNum = 0; stringNum < numberOfStrings; stringNum++) {
-            for (var fretNum = 1; fretNum < numberOfFrets+1; fretNum++) {
+        for (let stringNum = 0; stringNum < numberOfStrings; stringNum++) {
+            for (let fretNum = 1; fretNum < numberOfFrets+1; fretNum++) {
                 openNoteNum = this.guitar[stringNum][0][1][0];
                 fretNoteNum = (openNoteNum+fretNum) % 12;
                 neckNoteString = this.numToNoteDict[fretNoteNum];

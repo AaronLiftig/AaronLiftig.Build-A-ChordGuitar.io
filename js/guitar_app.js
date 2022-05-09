@@ -72,23 +72,23 @@ class GuitarApp {
         this.yourGuitar = new Guitar({numberOfStrings: numOfStrings, tuning: tuning, numberOfFrets: numOfFrets});
     }
   
-    GetMiniScreen(stringNum,fretNum) {
-        var rootNoteNum = this.yourGuitar.guitar[stringNum][fretNum][1][0];
-        var guitarStringLen = this.yourGuitar.guitar.length;
+    getMiniScreen(stringNum, fretNum) {
+        let rootNoteNum = this.yourGuitar.guitar[stringNum][fretNum][1][0];
+        let guitarStringLen = this.yourGuitar.guitar.length;
         this.miniScreen = [];
-        for (var string = 0; string < guitarStringLen; string++) {
+        for (let string = 0; string < guitarStringLen; string++) {
             this.miniScreen.push([]);
         }
 
-        var low;
-        var high;
+        let low;
+        let high;
         if (fretNum <= 3) { // Allows for miniScreen to always have 9 frets
             low = fretNum;
             high = 9 - low;
             this.currentFret = [stringNum,fretNum];
         }
         else if (fretNum >= this.yourGuitar.numberOfFrets - 3) {
-            var guitarFretLen = this.yourGuitar.guitar[0].length;
+            let guitarFretLen = this.yourGuitar.guitar[0].length;
             high = guitarFretLen-fretNum;
             low = 9 - high;
             this.currentFret = [stringNum,8-guitarFretLen+fretNum];
@@ -99,13 +99,13 @@ class GuitarApp {
             this.currentFret = [stringNum,4];
         }
 
-        var i;
-        var noteTup;
-        var noteDiff;
-        var noteString;
-        for (var string = 0; string < guitarStringLen; string++) {
+        let i;
+        let noteTup;
+        let noteDiff;
+        let noteString;
+        for (let string = 0; string < guitarStringLen; string++) {
             i = 0;
-            for (var fret = fretNum-low; fret < fretNum+high; fret++) {
+            for (let fret = fretNum-low; fret < fretNum+high; fret++) {
                 noteTup = this.yourGuitar.guitar[string][fret];
                 noteDiff = (noteTup[1][0] - rootNoteNum) % this.noteList.length;
                 noteDiff = (noteDiff + this.noteList.length) % this.noteList.length;
@@ -117,23 +117,23 @@ class GuitarApp {
                 i = (i+1) % 9; // miniScreen has constant fret length of 9
             }
         }
-        return this.ApplyCordToMiniScreen({});
+        return this.applyCordToMiniScreen({});
     }
 
-    ApplyCordToMiniScreen({cordString="major"} = {}) {
+    applyCordToMiniScreen({cordString="major"} = {}) {
         this.cordAppliedMiniScreen = structuredClone(this.miniScreen);
-        var cordNoteList = this.cordDict[cordString];
-        var [string,fret] = [this.currentFret[0],this.currentFret[1]];
+        let cordNoteList = this.cordDict[cordString];
+        let [string,fret] = [this.currentFret[0],this.currentFret[1]];
         
-        var string;
-        for (var i = 0; i < this.miniScreen.length; i++) {
-            string = this.miniScreen[i];
-            for (var j = 0; j < string.length; j++) {
-                fret = string[j];
+        let miniString;
+        for (let i = 0; i < this.miniScreen.length; i++) {
+            miniString = this.miniScreen[i];
+            for (let j = 0; j < miniString.length; j++) {
+                fret = miniString[j];
                 if (!(fret[2][0] in cordNoteList)) {
                     this.cordAppliedMiniScreen[i][j] = [fret[0],fret[1],
                                                         [fret[2][0],"dropped"]
-                                                        ,fret[3]];
+                                                        ,fret[3],fret[4]];
                 }
             }
         }
