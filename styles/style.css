@@ -9,6 +9,10 @@
     white-space: nowrap;
 }
 
+#main-guitar .guitar-fret {
+    cursor: pointer;
+}
+
 /* fret and fret-axis colors and borders */
 .guitar-fret {
     width: 35px;
@@ -17,8 +21,6 @@
     border-width: thin;
     border-color: black;
     background-color: #E8E8E8;
-
-    cursor: pointer;
 }
 
 .guitar-fret-axis {
