@@ -118,10 +118,10 @@ class GuitarApp {
             }
         }
 
-        return this._applyCordToMiniScreen(chordName);
+        return this._applyChordToMiniScreen(chordName);
     }
 
-    _applyCordToMiniScreen(chordString) {
+    _applyChordToMiniScreen(chordString) {
         this.chordAppliedMiniScreen = structuredClone(this.miniScreen);
         let chordNoteList = this.chordDict[chordString];
         

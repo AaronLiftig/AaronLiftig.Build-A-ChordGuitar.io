@@ -40,7 +40,7 @@ function createCopyright() {
     const year = today.getFullYear();
 
     const footerPTag = document.getElementById("copyright");
-    const footerText = document.createTextNode("© " + year + " - Free Build-A-Cord Guitar Learning");
+    const footerText = document.createTextNode("© " + year + " - Free Build-A-Chord Guitar Learning");
     footerPTag.append(footerText);
 }
 
