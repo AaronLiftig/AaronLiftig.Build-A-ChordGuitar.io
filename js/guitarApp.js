@@ -40,33 +40,33 @@ class GuitarApp {
                          };
         
         this.noteList = [
-                         "root",
-                         "minor 2nd",
-                         "major 2nd",
-                         "minor 3rd",
-                         "major 3rd",
-                         "perfect 4th",
-                         "aug/dim 4th/5th",
-                         "perfect 5th",
-                         "minor 6th",
-                         "major 6th",
-                         "minor 7th",
-                         "major 7th",
+                         "Root",
+                         "Minor 2nd",
+                         "Major 2nd",
+                         "Minor 3rd",
+                         "Major 3rd",
+                         "Perfect 4th",
+                         "Aug/Dim 4th/5th",
+                         "Perfect 5th",
+                         "Minor 6th",
+                         "Major 6th",
+                         "Minor 7th",
+                         "Major 7th",
                          ];
 
         this.noteColorDict = {
-                              "root":"black",
-                              "minor 2nd":"dodgerBlue",
-                              "major 2nd":"darkSalmon",
-                              "minor 3rd":"navy",
-                              "major 3rd":"firebrick",
-                              "perfect 4th":"lime",
-                              "aug/dim 4th/5th":"violet",
-                              "perfect 5th":"yellow",
-                              "minor 6th":"skyBlue",
-                              "major 6th":"lightCoral",
-                              "minor 7th":"blue",
-                              "major 7th":"red"
+                              "Root":"black",
+                              "Minor 2nd":"dodgerBlue",
+                              "Major 2nd":"darkSalmon",
+                              "Minor 3rd":"navy",
+                              "Major 3rd":"firebrick",
+                              "Perfect 4th":"lime",
+                              "Aug/Dim 4th/5th":"violet",
+                              "Perfect 5th":"yellow",
+                              "Minor 6th":"skyBlue",
+                              "Major 6th":"lightCoral",
+                              "Minor 7th":"blue",
+                              "Major 7th":"red"
                               };
 
         this.yourGuitar = new Guitar({numberOfStrings: numOfStrings, tuning: tuning, numberOfFrets: numOfFrets});
@@ -110,10 +110,19 @@ class GuitarApp {
                 noteDiff = (noteTup[1][0] - rootNoteNum) % this.noteList.length;
                 noteDiff = (noteDiff + this.noteList.length) % this.noteList.length;
                 noteString = this.noteList[noteDiff];
-                this.miniScreen[string].push([noteTup[0],noteTup[1],
-                                            [noteDiff,noteString],
-                                            this.noteColorDict[noteString],
-                                            i]);
+                console.log([stringNum,fretNum]);
+                console.log(noteTup[0]);
+                if (stringNum == noteTup[0][0] && fretNum == noteTup[0][1]) {
+                    this.miniScreen[string].push([noteTup[0],noteTup[1],
+                        [noteDiff,noteString],
+                        "purple",
+                        i]);
+                } else {
+                    this.miniScreen[string].push([noteTup[0],noteTup[1],
+                                                [noteDiff,noteString],
+                                                this.noteColorDict[noteString],
+                                                i]);
+                }
                 i = (i+1) % 9; // miniScreen has constant fret length of 9
             }
         }

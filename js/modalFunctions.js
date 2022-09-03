@@ -20,13 +20,13 @@ function addCloseEventListenersToButtonAndOverlay() {
         const modals = document.querySelectorAll(".modalDiv.active");
         modals.forEach(modal => {
             closeModal(modal);
-        })
+        });
     })
 
     closeModalButtons.forEach(button => {
         button.addEventListener("click", () => {
             const modal = button.closest(".modalDiv");
             closeModal(modal);
-        })
+        });
     })
 }

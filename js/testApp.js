@@ -50,7 +50,7 @@ let yourDefaultMiniScreen = guitarApp.getMiniScreen(3,10);
 
 console.log("Mini Screen:");
 for (let num = 0; num < yourDefaultMiniScreen.length; num++){
-    console.log("String "+(num+1)+":",yourDefaultMiniScreen[num],"\n")
+    console.log("String "+(num+1)+":",yourDefaultMiniScreen[num],"\n");
 }
 console.log("\n\n");
 

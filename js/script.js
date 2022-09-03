@@ -21,7 +21,7 @@ function createDropdown(selectTagId, optionsIterable, {defaultOption = null,
         if (valueMethod === false) {
             optionTag.value = option;
         } else {
-            optionTag.value = option.toLowerCase()
+            optionTag.value = option.toLowerCase();
         }
 
         if (defaultOption != null) {
@@ -46,12 +46,12 @@ function createCopyright() {
 
 
 function adjustTextColorToBackground(element, backgroundColor) {
-    if (["black", "blue", "navy"].includes(backgroundColor)) {
+    if (["black", "blue", "navy", "purple"].includes(backgroundColor)) {
         element.style.color = "white";
-    } else if (["yellow"].includes(backgroundColor)) {
+    } else if (["yellow"].includes(backgroundColor)) { // fixes nut text for yellow background
         element.style.color = "black";
     }
-    return element
+    return element;
 }
 
 

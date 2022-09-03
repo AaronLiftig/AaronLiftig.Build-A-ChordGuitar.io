@@ -53,7 +53,7 @@ class Guitar {
     _createGuitar({numberOfStrings=6, numberOfFrets=24}) {
     //Called by itself if tuning not changed
         this.guitar = [];
-        this.numberOfFrets = numberOfFrets
+        this.numberOfFrets = numberOfFrets;
         let noteNum;
         let leadNoteString;
         // Add open string information to guitar

@@ -27,8 +27,7 @@ function fixTextContent(text, previousText) {
         textNumber += 7;
         let firstWord = text.split(" ")[0];
         return firstWord + " " + textNumber + "th";
-    }
-    else {
+    } else {
         return text;
     }
 }
@@ -50,9 +49,18 @@ function createMiniScreenNoteColorLegend(guitarApp, chordName) {
     const legendList = document.getElementById("chord-legend");
     legendList.innerHTML = "";
 
+    const selectedNoteItem = document.createElement("li");
+    selectedNoteItem.style.listStyleType = "none";
+    selectedNoteItem.style.backgroundColor = "purple";
+    selectedNoteItem.style.color = "white";
+    selectedNoteItem.textContent = "Your Note";
+
+    legendList.append(selectedNoteItem);
+
     let previousText = null;
     for (let noteInfo of uniqueNoteNames) {
         const listItem = document.createElement("li");
+        listItem.style.listStyleType = "none";
         listItem.style.backgroundColor = noteInfo[1];
         let fixedText = fixTextContent(noteInfo[0], previousText);
         previousText = fixedText;

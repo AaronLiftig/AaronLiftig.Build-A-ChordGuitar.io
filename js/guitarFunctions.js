@@ -79,7 +79,7 @@ function createFret(guitarAxisRow, accidentalType, guitarString, stringNum, b, v
     if (view === "mini-screen" && guitarString[b][3] !== "dropped") {
         fret.style.backgroundColor = guitarString[b][3];
         
-        fret = adjustTextColorToBackground(fret, guitarString[b][3])
+        fret = adjustTextColorToBackground(fret, guitarString[b][3]);
     }
 
     fret.dataset.modalTarget = "#modal";
@@ -127,9 +127,9 @@ function addOpenEventListenersToGuitar() {
             let [stringNum, fretNum] = button.id.split(",");
             stringNum = parseInt(stringNum);
             fretNum = parseInt(fretNum);
-            updateGuitarDiv("mini-screen", {stringNum: stringNum, fretNum: fretNum})
+            updateGuitarDiv("mini-screen", {stringNum: stringNum, fretNum: fretNum});
 
-            userLocation = [stringNum, fretNum] 
+            userLocation = [stringNum, fretNum];
 
             const guitarApp = new GuitarApp({tuning: "standard", numOfFrets: 22});
             const chordList = Object.keys(guitarApp.chordDict);
@@ -156,7 +156,7 @@ function updateGuitarDiv(view, {stringNum = null, fretNum = null, chordName = "m
         guitar = getGuitar(guitarApp);
         guitarElement = document.getElementById("main-guitar");
     } else {
-        guitar = getMiniScreen(guitarApp, stringNum, fretNum, {chordName: chordName})
+        guitar = getMiniScreen(guitarApp, stringNum, fretNum, {chordName: chordName});
         guitarElement = document.getElementById("mini-screen");
         createMiniScreenNoteColorLegend(guitarApp, chordName);
     }
