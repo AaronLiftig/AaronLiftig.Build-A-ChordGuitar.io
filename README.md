@@ -5,4 +5,4 @@ This is based on a project I made in Excel in 2018, seen [here](https://docs.goo
 
 The app makes the Excel information easier to understand and use. 
 
-Currently, the app uses modulo 12 (number of notes in the octave) to produce the chord names and colors. 9, 11, and 13-chord labels have been fixed and are now represented correctly.
+9, 11, and 13-chord labels have been fixed and are now represented correctly.
