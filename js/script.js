@@ -46,7 +46,7 @@ function createCopyright() {
 
 
 function adjustTextColorToBackground(element, backgroundColor) {
-    if (["black", "blue", "navy", "purple"].includes(backgroundColor)) {
+    if (["black", "blue", "navy", "purple", "firebrick"].includes(backgroundColor)) {
         element.style.color = "white";
     } else if (["yellow"].includes(backgroundColor)) { // fixes nut text for yellow background
         element.style.color = "black";
