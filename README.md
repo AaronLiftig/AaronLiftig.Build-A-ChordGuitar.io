@@ -1,8 +1,29 @@
 # Build-A-Chord Guitar App
-This app is hosted by Github Pages [here](https://AaronLiftig.github.io/AaronLiftig.Build-A-ChordGuitar.io/).
 
-This is based on a project I made in Excel in 2018, seen [here](https://docs.google.com/spreadsheets/d/1sfWmnnegRTWOyKYqtyJ4zkp7vByrmPMrsCeubvCgsXs/edit?usp=sharing).
+## Overview
 
-The app makes the Excel information easier to understand and use. 
+Build-A-Chord Guitar App is a web tool designed to help beginners learn and visualize complex guitar chords interactively and intuitively. This app makes understanding and using guitar chord diagrams easier compared to traditional methods.
 
-9, 11, and 13-chord labels have been fixed and are now represented correctly.
+## Features
+
+- **Interactive Chord Builder**: Easily construct and visualize various guitar chords.
+- **Accurate Representation**: Updates and fixes to chord labels for accurate representation of 9, 11, and 13 chords.
+- **Beginner-Friendly**: Simplifies learning complex guitar chords with an easy-to-use interface.
+- **Responsive Design**: Works well across different devices and screen sizes.
+
+## Links
+
+- **Live App**: Hosted on GitHub Pages [here](https://AaronLiftig.github.io/AaronLiftig.Build-A-ChordGuitar.io/).
+- **Original Project**: Based on a 2018 Excel project, viewable [here](https://docs.google.com/spreadsheets/d/1sfWmnnegRTWOyKYqtyJ4zkp7vByrmPMrsCeubvCgsXs/edit?usp=sharing).
+
+## Technologies Used
+
+- **Frontend**: JavaScript, HTML, CSS, Bootstrap
+
+## Installation
+
+To run this project locally:
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/AaronL87/Build-A-ChordGuitar.git
