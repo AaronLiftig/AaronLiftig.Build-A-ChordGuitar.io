@@ -19,11 +19,3 @@ Build-A-Chord Guitar App is a web tool designed to help beginners learn and visu
 ## Technologies Used
 
 - **Frontend**: JavaScript, HTML, CSS, Bootstrap
-
-## Installation
-
-To run this project locally:
-
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/AaronL87/Build-A-ChordGuitar.git
