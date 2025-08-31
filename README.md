@@ -13,7 +13,7 @@ Build-A-Chord Guitar App is a web tool designed to help beginners learn and visu
 
 ## Links
 
-- **Live App**: Hosted on GitHub Pages [here](https://AaronLiftig.github.io/AaronLiftig.Build-A-ChordGuitar.io/).
+- **Live App**: Hosted on GitHub Pages [here](https://aaronliftig.github.io/Build-A-Chord/).
 - **Original Project**: Based on a 2018 Excel project, viewable [here](https://docs.google.com/spreadsheets/d/1sfWmnnegRTWOyKYqtyJ4zkp7vByrmPMrsCeubvCgsXs/edit?usp=sharing).
 
 ## Technologies Used
